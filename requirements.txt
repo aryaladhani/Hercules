@@ -1,0 +1,8 @@
+pandas>=2.0
+pyarrow
+requests
+tqdm
+matplotlib
+openpyxl
+# optional: only for --index-source yfinance
+yfinance

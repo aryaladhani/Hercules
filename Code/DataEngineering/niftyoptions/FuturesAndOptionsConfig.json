@@ -1,0 +1,258 @@
+{
+  "nifty": {
+    "lot_size_history": [
+      {
+        "from": "2000-01-01",
+        "to": "2021-10-06",
+        "lot_size": 75,
+        "note": "NSE-rationalized standard lot from Oct-2015 onward; 75 was the standing Nifty lot size for years prior to 2021 lot reduction"
+      },
+      {
+        "from": "2021-10-07",
+        "to": "2024-04-25",
+        "lot_size": 50,
+        "note": "Reduced to 50 in Oct-2021 as Nifty crossed 17000 and contract value drifted above retail-friendly band"
+      },
+      {
+        "from": "2024-04-26",
+        "to": "2024-11-19",
+        "lot_size": 25,
+        "note": "Brief 25-lot regime in 2024 as Nifty hit new highs and contract value ballooned; reduced for retail access"
+      },
+      {
+        "from": "2024-11-20",
+        "to": "2025-12-31",
+        "lot_size": 75,
+        "note": "SEBI ₹15L minimum contract value rule; weekly contracts from 20-Nov-2024, long-dated transitioned 26-Dec-2024"
+      },
+      {
+        "from": "2026-01-01",
+        "to": "9999-12-31",
+        "lot_size": 65,
+        "note": "NSE reduced lot size Nov-2025 as index exceeded ₹20L upper band; effective for contracts expiring Jan-2026+"
+      }
+    ],
+    "expiry_day_history": [
+      {
+        "from": "2019-02-01",
+        "to": "2025-08-28",
+        "day": "Thursday",
+        "isoweekday": 4,
+        "note": "Weekly options launched Feb-2019 with Thursday expiry; last Thursday expiry 28-Aug-2025"
+      },
+      {
+        "from": "2025-09-02",
+        "to": "9999-12-31",
+        "day": "Tuesday",
+        "isoweekday": 2,
+        "note": "SEBI standardisation: NSE moved from Thursday to Tuesday from 2-Sep-2025"
+      }
+    ],
+    "margin_model": {
+      "source": "NSE Clearing — https://nseclearing.in/risk-management/equity-derivatives/margins",
+      "notes": [
+        "SPAN component for a defined-risk spread (iron condor): NSE SPAN scenario matrices run 16 price+vol scenarios.",
+        "For a hedged spread the worst-case scenario is bounded by the spread width. SPAN ≈ wing_width × lot_size.",
+        "ELM (Extreme Loss Margin) is charged on the notional value of EACH short index option leg.",
+        "For an iron condor with 2 short legs: total ELM = elm_rate_per_leg × spot × lot_size × 2.",
+        "Expiry-day additional ELM applies only when holding short options on the actual expiry day.",
+        "This strategy exits on Monday; Nifty expiry is Tuesday — so expiry-day ELM never applies."
+      ],
+      "span_model": "wing_width_times_lot_size",
+      "elm_history": [
+        {
+          "from": "2000-01-01",
+          "to": "9999-12-31",
+          "elm_rate_per_leg": 0.02,
+          "note": "2% of notional value per short index option leg. NSE Clearing official rate — unchanged since inception of index derivatives."
+        }
+      ],
+      "expiry_day_elm_history": [
+        {
+          "from": "2000-01-01",
+          "to": "2024-11-19",
+          "additional_rate": 0.0,
+          "note": "No additional expiry-day ELM before SEBI circular Oct-2024"
+        },
+        {
+          "from": "2024-11-20",
+          "to": "9999-12-31",
+          "additional_rate": 0.02,
+          "note": "SEBI circular SEBI/HO/MRD/MRD-PoD-2/P/CIR/2024/116 (Oct-2024): +2% ELM on short index options on expiry day. Not applicable to this strategy (exits Monday, expiry Tuesday)."
+        }
+      ],
+      "stt_history": [
+        {
+          "from": "2000-01-01",
+          "to": "2023-09-30",
+          "stt_rate_sell": 0.0005,
+          "note": "0.05% STT on options premium sell-side. Pre-Budget-2023 rate."
+        },
+        {
+          "from": "2023-10-01",
+          "to": "2024-09-30",
+          "stt_rate_sell": 0.000625,
+          "note": "0.0625% STT on options premium sell-side. Budget 2023 hike effective 1-Oct-2023."
+        },
+        {
+          "from": "2024-10-01",
+          "to": "2026-03-31",
+          "stt_rate_sell": 0.001,
+          "note": "0.10% STT on options premium sell-side. Budget 2024 hike effective 1-Oct-2024."
+        },
+        {
+          "from": "2026-04-01",
+          "to": "9999-12-31",
+          "stt_rate_sell": 0.0015,
+          "note": "0.15% STT on options premium sell-side. Union Budget 2026 hike effective 1-Apr-2026."
+        }
+      ],
+      "margin_rate_history": [
+        {
+          "from": "2020-01-01",
+          "rate": 0.065,
+          "note": "Pre peak-margin era — SEBI circular not yet in full effect; blended SPAN+ELM effective rate for short strangle."
+        },
+        {
+          "from": "2021-09-01",
+          "rate": 0.09,
+          "note": "Phase 1 peak-margin enforcement from Sep-2021."
+        },
+        {
+          "from": "2021-12-01",
+          "rate": 0.1,
+          "note": "Phase 2 peak-margin enforcement from Dec-2021."
+        },
+        {
+          "from": "2022-01-01",
+          "rate": 0.12,
+          "note": "Full peak-margin enforcement from Jan-2022. 12% of notional per strangle leg (combined)."
+        },
+        {
+          "from": "2024-11-20",
+          "rate": 0.13,
+          "note": "Post SEBI F&O reforms Oct-2024; lot size increased 25→75. Slightly higher margin requirement."
+        },
+        {
+          "from": "2026-01-01",
+          "rate": 0.132,
+          "note": "Lot size reduced to 65 from Jan-2026. Effective combined SPAN+ELM rate calibrated to Zerodha basket margin for 3-strangle (6 legs, 1 lot each, Nifty ~23500): Rs6,04,267 actual vs Rs5,72,813 at 12.5% — implied 13.19%, rounded to 13.2%."
+        }
+      ]
+    }
+  },
+  "sensex": {
+    "lot_size_history": [
+      {
+        "from": "2000-01-01",
+        "to": "2023-05-19",
+        "lot_size": 15,
+        "note": "Pre-2023 dormant cycle"
+      },
+      {
+        "from": "2023-05-20",
+        "to": "2024-11-19",
+        "lot_size": 10,
+        "note": "BSE relaunch May-2023"
+      },
+      {
+        "from": "2024-11-20",
+        "to": "9999-12-31",
+        "lot_size": 20,
+        "note": "SEBI ₹15L minimum rule; long-dated contracts shifted 27-Dec-2024. Unchanged since."
+      }
+    ],
+    "expiry_day_history": [
+      {
+        "from": "2023-05-20",
+        "to": "2024-12-31",
+        "day": "Friday",
+        "isoweekday": 5,
+        "note": "BSE relaunch with Friday expiry"
+      },
+      {
+        "from": "2025-01-01",
+        "to": "2025-09-03",
+        "day": "Tuesday",
+        "isoweekday": 2,
+        "note": "Changed to Tuesday from 1-Jan-2025"
+      },
+      {
+        "from": "2025-09-04",
+        "to": "9999-12-31",
+        "day": "Thursday",
+        "isoweekday": 4,
+        "note": "SEBI standardisation: BSE moved to Thursday from 4-Sep-2025"
+      }
+    ],
+    "margin_model": {
+      "source": "BSE Clearing — same SEBI SPAN+ELM framework as NSE; ELM rate 2% per short index option leg.",
+      "notes": [
+        "BSE Clearing runs the same SPAN scenario matrix as NSE Clearing.",
+        "ELM charged at 2% of notional per short index option leg (same SEBI rule).",
+        "STT is a national tax — identical rates to NSE.",
+        "Sensex weekly options relaunched 20-May-2023; no meaningful backtest data before that date."
+      ],
+      "stt_history": [
+        {
+          "from": "2000-01-01",
+          "to": "2023-09-30",
+          "stt_rate_sell": 0.0005,
+          "note": "0.05% STT on options premium sell-side. Pre-Budget-2023 rate."
+        },
+        {
+          "from": "2023-10-01",
+          "to": "2024-09-30",
+          "stt_rate_sell": 0.000625,
+          "note": "0.0625% STT on options premium sell-side. Budget 2023 hike effective 1-Oct-2023."
+        },
+        {
+          "from": "2024-10-01",
+          "to": "2026-03-31",
+          "stt_rate_sell": 0.001,
+          "note": "0.10% STT on options premium sell-side. Budget 2024 hike effective 1-Oct-2024."
+        },
+        {
+          "from": "2026-04-01",
+          "to": "9999-12-31",
+          "stt_rate_sell": 0.0015,
+          "note": "0.15% STT on options premium sell-side. Union Budget 2026 hike effective 1-Apr-2026."
+        }
+      ],
+      "margin_rate_history": [
+        {
+          "from": "2023-05-20",
+          "rate": 0.12,
+          "note": "Sensex weekly relaunch. Full peak-margin era already in force; lot size 10. Blended SPAN+ELM ~12% of notional per strangle."
+        },
+        {
+          "from": "2024-11-20",
+          "rate": 0.13,
+          "note": "Post SEBI F&O reforms Oct-2024; lot size increased 10→20. Higher margin requirement consistent with nifty at same date."
+        }
+      ],
+      "expiry_day_elm_history": [
+        {
+          "from": "2000-01-01",
+          "to": "2024-11-19",
+          "additional_rate": 0.0,
+          "note": "No additional expiry-day ELM before SEBI circular Oct-2024"
+        },
+        {
+          "from": "2024-11-20",
+          "to": "9999-12-31",
+          "additional_rate": 0.02,
+          "note": "SEBI circular SEBI/HO/MRD/MRD-PoD-2/P/CIR/2024/116 (Oct-2024): +2% ELM per short index option leg on expiry day. Applies to BSE Sensex options identically (SEBI mandate, exchange-agnostic). Added 2026-07-09 for correct expiry-day strangle margins."
+        }
+      ],
+      "elm_history": [
+        {
+          "from": "2000-01-01",
+          "to": "9999-12-31",
+          "elm_rate_per_leg": 0.02,
+          "note": "2% of notional per short index option leg. BSE Clearing follows same SEBI framework as NSE. Added 2026-07-09."
+        }
+      ]
+    }
+  }
+}

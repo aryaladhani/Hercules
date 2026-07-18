@@ -1,0 +1,13 @@
+# Data — never commit (large, regenerable from the pipeline)
+Data/
+
+# Excel lock files
+~$*
+
+# OS / editor noise
+.DS_Store
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
