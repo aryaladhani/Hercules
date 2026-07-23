@@ -115,8 +115,10 @@ class OptionsBhavcopyDownloader:
     @staticmethod
     def _old_url(d: date) -> str:
         mon = d.strftime("%b").upper()
+        # Legacy host archives.nseindia.com now 503s; nsearchives serves the
+        # same historical old-format zips.
         return (
-            "https://archives.nseindia.com/content/historical/DERIVATIVES/"
+            "https://nsearchives.nseindia.com/content/historical/DERIVATIVES/"
             f"{d.year}/{mon}/fo{d.strftime('%d')}{mon}{d.year}bhav.csv.zip"
         )
 

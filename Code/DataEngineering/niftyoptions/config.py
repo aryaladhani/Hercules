@@ -51,11 +51,11 @@ class Config:
 
     @property
     def settle_spread_dir(self) -> Path:
-        return self.spread_dir / "Daily Settle Spreads"
+        return self.spread_dir / "SettleSpreads"
 
     @property
     def minute_spread_dir(self) -> Path:
-        return self.spread_dir / "Minute Level OHLC Spreads"
+        return self.spread_dir / "Spreads"
 
     # ---- raw files (downloader outputs) ----------------------------------
     @property
